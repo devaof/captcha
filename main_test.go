@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-
 func TestGetOperator(t *testing.T) {
 	t.Run("0", testGetOperator(0, "+"))
 	t.Run("1", testGetOperator(1, "-"))
@@ -45,14 +44,14 @@ func testConvertNumberToText(number int, expect string) func(t *testing.T) {
 }
 
 func TestGenerateCaptcha(t *testing.T) {
-	t.Run("1 1 1 1", testGenerateCaptcha(1,1,1,1, "one - 1"))
-	t.Run("1 1 0 1", testGenerateCaptcha(1,1,0,1, "one + 1"))
-	t.Run("0 1 1 1", testGenerateCaptcha(0,1,1,1, "1 - one"))
-	t.Run("0 1 0 1", testGenerateCaptcha(0,1,0,1, "1 + one"))
-	t.Run("1 2 2 1", testGenerateCaptcha(1,2,2,1, "two * 1"))
-	t.Run("0 2 2 1", testGenerateCaptcha(0,2,2,1, "2 * one"))
-	t.Run("0 2 3 1", testGenerateCaptcha(0,2,3,1, "Unknown Operator"))
-	t.Run("0 9 3 1", testGenerateCaptcha(0,2,3,1, "Unknown Operator"))
+	t.Run("1 1 1 1", testGenerateCaptcha(1, 1, 1, 1, "one - 1"))
+	t.Run("1 1 0 1", testGenerateCaptcha(1, 1, 0, 1, "one + 1"))
+	t.Run("0 1 1 1", testGenerateCaptcha(0, 1, 1, 1, "1 - one"))
+	t.Run("0 1 0 1", testGenerateCaptcha(0, 1, 0, 1, "1 + one"))
+	t.Run("1 2 2 1", testGenerateCaptcha(1, 2, 2, 1, "two * 1"))
+	t.Run("0 2 2 1", testGenerateCaptcha(0, 2, 2, 1, "2 * one"))
+	t.Run("0 2 3 1", testGenerateCaptcha(0, 2, 3, 1, "Unknown Operator"))
+	t.Run("0 10 2 1", testGenerateCaptcha(0, 10, 2, 1, "Number Out Of Scope"))
 }
 
 func testGenerateCaptcha(format int, lOper int, operator int, rOper int, expect string) func(t *testing.T) {
