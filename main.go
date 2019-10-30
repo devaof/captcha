@@ -6,65 +6,34 @@ import (
 	"strconv"
 )
 
+// Operator :
+var Operator = map[int]string{
+	0: "+",
+	1: "-",
+	2: "*"}
+
+// NumText :
+var NumText = map[int]string{
+	1: "one",
+	2: "two",
+	3: "three",
+	4: "four",
+	5: "five",
+	6: "six",
+	7: "seven",
+	8: "eight",
+	9: "nine"}
+
 func getOperator(number int) string {
-	switch number {
-	case 0:
-		return "+"
-	case 1:
-		return "-"
-	case 2:
-		return "*"
-	default:
-		return "Unknown Operator"
-	}
-}
-
-func convertNumberToText(number int) string {
-	switch number {
-	case 1:
-		return "one"
-	case 2:
-		return "two"
-	case 3:
-		return "three"
-	case 4:
-		return "four"
-	case 5:
-		return "five"
-	case 6:
-		return "six"
-	case 7:
-		return "seven"
-	case 8:
-		return "eight"
-	case 9:
-		return "nine"
-	default:
-		return "Number Out Of Scope"
-	}
-}
-
-func isNumberOutOfScope(number int) bool {
-	return number < 1 || number > 9
+	return Operator[number]
 }
 
 func generateCaptcha(format int, lOper int, operator int, rOper int) string {
-
-	o := getOperator(operator)
-
-	if o == "Unknown Operator" {
-		return fmt.Sprintf("%s", o)
+	captcha := map[int]string{
+		0: fmt.Sprintf("%d %s %s", lOper, Operator[operator], NumText[rOper]),
+		1: fmt.Sprintf("%s %s %d", NumText[lOper], Operator[operator], rOper),
 	}
-
-	if isNumberOutOfScope(lOper) || isNumberOutOfScope(rOper) {
-		return "Number Out Of Scope"
-	}
-
-	if format == 0 {
-		return fmt.Sprintf("%d %s %s", lOper, o, convertNumberToText(rOper))
-	}
-
-	return fmt.Sprintf("%s %s %d", convertNumberToText(lOper), o, rOper)
+	return captcha[format]
 }
 
 func main() {
